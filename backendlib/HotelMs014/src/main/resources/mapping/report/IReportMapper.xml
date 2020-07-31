@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.report.mapper.IReportMapper">
+
+	<resultMap id="ReportResultMap" type="Report" >
+		<id property="id" column="REPNO"/>
+		<result property="in" column="REPINCOME"/>
+		<result property="out" column="REPOUTCOME"/>
+		<result property="profit" column="REPPROFIT"/>
+		<result property="time" column="REPDATE"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Report" keyProperty="id"   keyColumn="REPNO"  useGeneratedKeys="true">
+	insert into hms_report (REPNO,REPINCOME,REPOUTCOME,REPPROFIT,REPDATE) values (#{id},#{in},#{out},#{profit},#{time})
+ 	</insert>
+ 	
+ 	 <update id="update">
+ 	update hms_report set REPNO=#{id},REPINCOME=#{in},REPOUTCOME=#{out},REPPROFIT=#{profit},REPDATE=#{time} where REPNO=#{id}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from hms_report  where REPNO=#{id} 
+ 	</delete>
+  
+ 	<select id="selectByAll"  resultMap="ReportResultMap">
+ 	select *  from hms_report
+ 	</select>
+ 	
+ 	<select id="selectByAllWithPage" resultMap="ReportResultMap">
+ 	select *  from hms_report limit #{start},#{rows}
+ 	</select>
+ 	
+ 	<select id="selectCountByAll" resultType="_int">
+ 	select count(*)  from hms_report
+ 	</select>
+ 
+ 	<select id="selectByNo"  resultMap="ReportResultMap">
+ 	select * from hms_report where REPNO=#{id}
+ 	</select>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.admin.mapper.IUserMapper">
+	<resultMap id="UserResultMap" type="User">
+		<id property="id" column="userID" />
+		<result property="password" column="userPassword" />
+		<result property="name" column="userName" />
+	</resultMap>
+	<update id="update">
+		update hms_user set userPassword=#{password},userName=#{name} where
+		userID=#{id}
+	</update>
+	<select id="selectById" resultMap="UserResultMap">
+		select * from hms_user where userID=#{id}
+	</select>
+</mapper>

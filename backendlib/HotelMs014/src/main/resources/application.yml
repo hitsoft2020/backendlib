@@ -1,0 +1,24 @@
+
+server:  port: 8200
+ 
+spring:
+  datasource:
+    username: group14
+    password: 123456
+    url: jdbc:mysql://localhost:1414/hitsofthms?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+
+mybatis:
+  mapper-locations: classpath:mapping/**/*.xml
+  type-aliases-package: com.hit.hotel.order.model,com.hit.hotel.vip.model,com.hit.hotel.admin.model,
+com.hit.hotel.client.model,com.hit.hotel.room.model,com.hit.hotel.roomtel.model,
+com.hit.hotel.payrecord.model,com.hit.hotel.employee.model,com.hit.hotel.payout.model,
+com.hit.hotel.consumption.model,com.hit.hotel.report,com.hit.hotel.goods.model
+ 
+#showSql
+logging:
+  level:
+     com.hit.hotel: debug
+    
+ 

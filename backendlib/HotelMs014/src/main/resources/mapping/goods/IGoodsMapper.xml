@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.goods.mapper.IGoodsMapper">
+
+	<resultMap id="GoodsResultMap" type="Goods" >
+		<id property="id" column="GOODSID"/>
+		<result property="uom" column="GOODSUOM"/>
+		<result property="name" column="GOODSNAME"/>
+		<result property="price" column="GOODSPRICE"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Goods" keyProperty="id"   keyColumn="GOODSID"  useGeneratedKeys="true">
+	insert into hms_goods (GOODSID,GOODSUOM,GOODSNAME,GOODSPRICE) values (#{id},#{uom},#{name},#{price})
+ 	</insert>
+  
+ 	<update id="update">
+ 	update  hms_goods set GOODSID=#{id},GOODSUOM=#{uom},GOODSNAME=#{name},GOODSPRICE=#{price} where GOODSID=#{id}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from hms_goods where GOODSID=#{id} 
+ 	</delete>
+  
+ 	<select id="selectByAll"  resultMap="GoodsResultMap">
+ 	select *  from hms_goods
+ 	</select>
+ 	
+ 	<select id="selectByAllWithPage" resultMap="GoodsResultMap">
+ 	select *  from hms_goods limit #{start},#{rows}
+ 	</select>
+ 	
+ 	<select id="selectCountByAll" resultType="_int">
+ 	select count(*)  from hms_goods
+ 	</select>
+ 
+ 	<select id="selectByNo"  resultMap="GoodsResultMap">
+ 	select * from hms_goods where GOODSID=#{id}
+ 	</select>
+  
+</mapper>

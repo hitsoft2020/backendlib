@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.order.mapper.IOrderMapper">
+
+	<resultMap id="OrderResultMap" type="Order" >
+		<id property="no" column="ORDERID"/>
+		<result property="customername" column="ORDERNAME"/>
+		<result property="vipcard" column="ORDERVIP"/>
+		<result property="idcard" column="ORDERIDNUM"/>
+		<result property="contactinfo" column="ORDERTEL"/>
+		<result property="roomtype" column="ORDERROOM"/>
+		<result property="quantity" column="ORDERNUM"/>
+		<result property="saleprice" column="ORDERSALE"/>
+		<result property="creatime" column="ORDERTIME"/>
+		<result property="orderstatus" column="ORDERSTATUS"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Order" keyProperty="no"   keyColumn="ORDERID"  useGeneratedKeys="true">
+	insert into hms_order (ORDERNAME,ORDERVIP,ORDERIDNUM,ORDERTEL,ORDERROOM,ORDERNUM,ORDERSALE,ORDERSTATUS) values (#{customername},#{vipcard},#{idcard},#{contactinfo},#{roomtype},#{quantity},#{saleprice},#{orderstatus})
+ 	</insert>
+  
+ 	<update id="update">
+ 	update  hms_order set ORDERNAME=#{customername},ORDERVIP=#{vipcard},ORDERIDNUM=#{idcard},ORDERTEL=#{contactinfo},ORDERROOM=#{roomtype},ORDERNUM=#{quantity},ORDERSALE=#{saleprice},ORDERSTATUS=#{orderstatus} where ORDERID=#{no}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from hms_order  where ORDERID=#{no} 
+ 	</delete>
+  
+ 	<select id="selectByAll"  resultMap="OrderResultMap">
+ 	select *  from hms_order
+ 	</select>
+ 	
+ 	<select id="selectByAllWithPage" resultMap="OrderResultMap">
+ 	select *  from hms_order limit #{start},#{rows}
+ 	</select>
+ 	
+ 	<select id="selectCountByAll" resultType="_int">
+ 	select count(*)  from hms_order
+ 	</select>
+ 
+ 	<select id="selectByNo"  resultMap="OrderResultMap">
+ 	select * from hms_order where ORDERID=#{no}
+ 	</select>
+  
+</mapper>

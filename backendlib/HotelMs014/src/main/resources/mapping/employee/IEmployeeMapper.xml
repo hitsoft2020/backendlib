@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.employee.mapper.IEmployeeMapper">
+
+	<resultMap id="EmployeeResultMap" type="Employee" >
+		<id property="no" column="EmployeeNo"/>
+		<result property="name" column="Name"/>
+		<result property="sex" column="Sex"/>
+		<result property="job" column="Position"/>		
+		<result property="phone_number" column="TEL"/>
+		<result property="idno" column="IDCardNum"/>
+
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Employee" keyProperty="no"   keyColumn="EmployeeNo"  useGeneratedKeys="true">
+	insert into hms_empolyee (Name,Sex,Position,TEL,IDCardNum) values (#{name},#{sex},#{job},#{phone_number},#{idno})
+ 	</insert>
+  
+ 	<update id="update">
+ 	update  hms_empolyee set Name=#{name},Sex=#{sex},Position=#{job},TEL=#{tel},IDCardNum=#{id} where EmployeeNo=#{no}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from hms_empolyee  where EmployeeNo=#{no} 
+ 	</delete>
+  
+ 	<select id="selectByAll"  resultMap="EmployeeResultMap">
+ 	select *  from hms_empolyee
+ 	</select>
+ 	
+ 	<select id="selectByAllWithPage" resultMap="EmployeeResultMap">
+ 	select *  from hms_empolyee limit #{start},#{rows}
+ 	</select>
+ 	
+ 	<select id="selectCountByAll" resultType="_int">
+ 	select count(*) from hms_empolyee
+ 	</select>
+ 
+ 	<select id="selectByNo"  resultMap="EmployeeResultMap">
+ 	select * from hms_empolyee where EmployeeNo=#{no}
+ 	</select>
+  
+</mapper>

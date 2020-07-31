@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.consumption.mapper.IConsumptionMapper">
+
+	<resultMap id="ConsumptionResultMap" type="Consumption" >
+		<id property="id" column="CONSNO"/>
+		<result property="room" column="CONSROOM"/>
+		<result property="goods" column="CONSGOODS"/>
+		<result property="num" column="CONSNUM"/>
+		<result property="totel" column="CONSMONEY"/>
+		<result property="time" column="CONSTIME"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Consumption" keyProperty="id"   keyColumn="CONSNO"  useGeneratedKeys="true">
+	insert into hms_consumption (CONSNO,CONSROOM,CONSGOODS,CONSNUM,CONSMONEY,CONSTIME) values (#{id},#{room},#{goods},#{num},#{totel},#{time})
+ 	</insert>
+ 	
+ 	<update id="update">
+ 	update  hms_consumption set  CONSNO=#{id},CONSROOM=#{room},CONSGOODS=#{goods},CONSNUM=#{num},CONSMONEY=#{totel},CONSTIME=#{time} where CONSNO=#{id}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from hms_consumption where CONSNO=#{id} 
+ 	</delete>
+  
+ 	<select id="selectByAll"  resultMap="ConsumptionResultMap">
+ 	select *  from hms_consumption
+ 	</select>
+ 	
+ 	<select id="selectByAllWithPage" resultMap="ConsumptionResultMap">
+ 	select *  from hms_consumption limit #{start},#{rows}
+ 	</select>
+ 	
+ 	<select id="selectCountByAll" resultType="_int">
+ 	select count(*)  from hms_consumption
+ 	</select>
+ 
+ 	<select id="selectByNo"  resultMap="ConsumptionResultMap">
+ 	select * from hms_consumption where CONSNO=#{id}
+ 	</select>
+  
+</mapper>

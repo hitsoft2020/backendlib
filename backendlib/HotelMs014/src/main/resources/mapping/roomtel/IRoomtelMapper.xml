@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.roomtel.mapper.IRoomtelMapper">
+
+	<resultMap id="RoomtelResultMap" type="Roomtel" >
+		<id property="no" column="ROOMTELNO"/>
+		<result property="telNum" column="ROOMTELTELNUM"/>
+		<result property="peopleName" column="ROOMTELPEOPLENAME"/>
+		<result property="time" column="ROOMTELTIME"/>
+		<result property="duration" column="ROOMTELDUR"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Roomtel" keyProperty="no"   keyColumn="ROOMTELNO"  useGeneratedKeys="true">
+	insert into hms_roomtel (ROOMTELTELNUM,ROOMTELPEOPLENAME,ROOMTELTIME,ROOMTELDUR) values (#{telNum},#{peopleName},#{time},#{duration})
+ 	</insert>
+  
+ 	<update id="update">
+ 	update  hms_roomtel set ROOMTELTELNUM=#{telNum},ROOMTELPEOPLENAME=#{peopleName},ROOMTELTIME=#{time},ROOMTELDUR=#{duration} where ROOMTELNO=#{no}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from hms_roomtel  where ROOMTELNO=#{no} 
+ 	</delete>
+  
+ 	<select id="selectByAll"  resultMap="RoomtelResultMap">
+ 	select *  from hms_roomtel
+ 	</select>
+ 	
+ 	<select id="selectByAllWithPage" resultMap="RoomtelResultMap">
+ 	select *  from hms_roomtel limit #{start},#{rows}
+ 	</select>
+ 	
+ 	<select id="selectCountByAll" resultType="_int">
+ 	select count(*)  from hms_roomtel
+ 	</select>
+ 
+ 	<select id="selectByNo"  resultMap="RoomtelResultMap">
+ 	select * from hms_roomtel where ROOMTELNO=#{no}
+ 	</select>
+  
+</mapper>

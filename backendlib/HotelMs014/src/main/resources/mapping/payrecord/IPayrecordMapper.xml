@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.payrecord.mapper.IPayrecordMapper">
+
+	<resultMap id="PayrecordResultMap" type="Payrecord" >
+		<id property="no" column="PAYCORDNO"/>
+		<result property="method" column="METHOD"/>
+		<result property="payer" column="PAYER"/>
+		<result property="date" column="DATE"/>
+		<result property="cost" column="COST"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Payrecord" keyProperty="no"   keyColumn="PAYCORDNO"  useGeneratedKeys="true">
+	insert into hms_payrecord (METHOD,PAYER,DATE,COST) values (#{method},#{payer},#{date},#{cost})
+ 	</insert>
+  
+ 	<update id="update">
+ 	update  hms_payrecord set METHOD=#{method},PAYER=#{payer},DATE=#{date},COST=#{cost} where PAYCORDNO=#{no}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from hms_payrecord  where PAYCORDNO=#{no} 
+ 	</delete>
+  
+ 	<select id="selectByAll"  resultMap="PayrecordResultMap">
+ 	select *  from hms_payrecord
+ 	</select>
+ 	
+ 	<select id="selectByAllWithPage" resultMap="PayrecordResultMap">
+ 	select *  from hms_payrecord limit #{start},#{rows}
+ 	</select>
+ 	
+ 	<select id="selectCountByAll" resultType="_int">
+ 	select count(*)  from hms_payrecord
+ 	</select>
+ 
+ 	<select id="selectByNo"  resultMap="PayrecordResultMap">
+ 	select * from hms_payrecord where PAYCORDNO=#{no}
+ 	</select>
+  
+</mapper>

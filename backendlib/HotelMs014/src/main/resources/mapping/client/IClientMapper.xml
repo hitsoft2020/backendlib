@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hit.hotel.client.mapper.IClientMapper">
+
+	<resultMap id="ClientResultMap" type="Client" >
+		<id property="no" column="CUSNO"/>
+		<result property="name" column="CUSNAME"/>
+		<result property="sex" column="CUSSEX"/>
+		<result property="idno" column="CUSID"/>
+		<result property="phone_number" column="CUSTEL"/>
+	</resultMap>
+
+	<insert id="insert"  parameterType="Client"  keyProperty="no"   keyColumn="CUSNO"  useGeneratedKeys="true">
+	insert into hms_customer (CUSNAME,CUSSEX,CUSID,CUSTEL) values (#{name},#{sex},#{idno},#{phone_number})
+ 	</insert>
+  
+ 	<update id="update">
+ 	update  hms_customer set CUSNAME=#{name},CUSSEX=#{sex},CUSID=#{idno},CUSTEL=#{phone_number} where CUSNO=#{no}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from hms_customer  where CUSNO=#{no} 
+ 	</delete>
+  
+ 	<select id="selectByAll"  resultMap="ClientResultMap">
+ 	select *  from hms_customer
+ 	</select>
+ 	
+ 	<select id="selectByAllWithPage" resultMap="ClientResultMap">
+ 	select *  from hms_customer limit #{start},#{rows}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectCountByAll" resultType="_int">
+ 	select count(*)  from hms_customer
+ 	</select>
+ 
+ 
+ 	<select id="selectByNo"  resultMap="ClientResultMap">
+ 	select * from hms_customer where CUSNO=#{no}
+ 	</select>
+  
+</mapper>
